@@ -5,3 +5,6 @@
 *.war
 *.ear
 /GoodIdea/target/
+/RestClientTest/nbproject/private/
+/RestClientTest/build/
+/RestClientTest/dist/

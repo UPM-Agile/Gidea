@@ -5,22 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Category for Business Ideas
  */
 @Entity
+@XmlRootElement
 public class Category implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    
-     private String name;
-    @OneToOne
-    private Idea ideas;
+    private String name;
+
     /**
      *
      * @return
@@ -66,22 +66,6 @@ public class Category implements Serializable {
      *
      * @return
      */
-    public Idea getIdeas() {
-        return ideas;
-    }
-
-    /**
-     *
-     * @param ideas
-     */
-    public void setIdeas(Idea ideas) {
-        this.ideas = ideas;
-    }
-
-    /**
-     *
-     * @return
-     */
     public String getName() {
         return name;
     }
@@ -93,5 +77,5 @@ public class Category implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

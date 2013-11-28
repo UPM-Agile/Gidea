@@ -1,4 +1,4 @@
-package upm.gidea.entities.exceptions;
+package upm.gidea.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

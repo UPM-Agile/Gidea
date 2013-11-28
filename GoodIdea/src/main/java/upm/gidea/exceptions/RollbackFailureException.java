@@ -1,4 +1,4 @@
-package upm.gidea.entities.exceptions;
+package upm.gidea.exceptions;
 
 /**
  *

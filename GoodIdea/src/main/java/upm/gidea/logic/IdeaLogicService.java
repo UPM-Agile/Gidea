@@ -1,11 +1,23 @@
 package upm.gidea.logic;
 
-import upm.gidea.entities.Idea;
+import upm.gidea.persistence.AbstractFacade;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import upm.gidea.entities.Idea;
 
-public class IdeaLogicService 
+@Stateless
+public class IdeaLogicService  extends AbstractFacade<Idea> 
 {    
+    @PersistenceContext(unitName = "upm.gidea_war_1.0-SNAPSHOT_PU")
+    private EntityManager em;
+
+    public IdeaLogicService() {
+        super(Idea.class);
+    }
+
     /**
      * Service that allows the creation of an idea by an entrepreneur
      * @param title
@@ -76,5 +88,10 @@ public class IdeaLogicService
     public List<Idea> findall(String KeyWord){
         List<Idea> found = new ArrayList<Idea>();
         return found;
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
     }
 }

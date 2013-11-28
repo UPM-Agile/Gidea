@@ -1,28 +1,41 @@
 package upm.gidea.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Business Idea
  */
 @Entity
+@XmlRootElement
 public class Idea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String name;
-    private String description;
-    @OneToOne
-    private Entrepreuner entrepreuner;
+    @Size(max = 200)
+    @Column(name = "title")
+    private String title;
     
-    @OneToOne
+    @Size(max = 1000)
+    @Column(name = "description")
+    private String description;
+
+    @ManyToOne(optional = false) //(mappedBy = "user_id")
+    private User owner;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idea", referencedColumnName = "category")
     private Category category;
     
     /**
@@ -98,36 +111,20 @@ public class Idea implements Serializable {
         return description;
     }
 
-    /**
-     *
-     * @return
-     */
-    public Entrepreuner getEntrepreuner() {
-        return entrepreuner;
+    public String getTitle() {
+        return title;
     }
 
-    /**
-     *
-     * @param entrepreuner
-     */
-    public void setEntrepreuner(Entrepreuner entrepreuner) {
-        this.entrepreuner = entrepreuner;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    /**
-     *
-     * @return
-     */
-    public String getName() {
-        return name;
+    public User getOwner() {
+        return owner;
     }
 
-    /**
-     *
-     * @param name
-     */
-    public void setName(String name) {
-        this.name = name;
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
     
     
