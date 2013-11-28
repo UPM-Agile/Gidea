@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  * Category for Business Ideas
@@ -16,6 +17,10 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    
+     private String name;
+    @OneToOne
+    private Idea ideas;
     /**
      *
      * @return
@@ -55,6 +60,38 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "entities.Category[ id=" + id + " ]";
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Idea getIdeas() {
+        return ideas;
+    }
+
+    /**
+     *
+     * @param ideas
+     */
+    public void setIdeas(Idea ideas) {
+        this.ideas = ideas;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
     
 }
