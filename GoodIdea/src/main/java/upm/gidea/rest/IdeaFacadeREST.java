@@ -30,7 +30,7 @@ public class IdeaFacadeREST
     
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Idea entity) {
+    public void create(Idea entity) throws Exception{
         try {
             logic.create(entity);
         } catch (Exception ex) {
