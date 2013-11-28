@@ -1,6 +1,8 @@
 package upm.gidea.rest;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
@@ -28,7 +30,11 @@ public class IdeaFacadeREST
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(Idea entity) {
-        logic.create(entity);
+        try {
+            logic.create(entity);
+        } catch (Exception ex) {
+            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @PUT

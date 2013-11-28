@@ -20,24 +20,25 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
 
     /**
      * Service that allows the creation of an idea by an entrepreneur
+     * @param idea
      * @param title
      * @param description
      * @param userId 
      */
-    public void createIdea(String title, String description, Integer userId, Integer categoryID ) throws Exception
+    @Override
+    public void create(Idea idea) throws Exception
     {
         // validate inputs
-        if (title == null||title.isEmpty()) {
+        if (idea.getTitle() == null||idea.getTitle().isEmpty()) {
             throw new Exception("Title is empty");   
         }
-        if (description.length() > 1000 ){
+        if(idea.getDescription() == null||idea.getDescription().isEmpty()){
+            throw new Exception("Please add a short description");
+        } 
+        if (idea.getDescription().length() > 1000 ){
             throw new Exception("The short description is too long");
         }
-        if(description == null||description.isEmpty()){
-            throw new Exception("Please add a short description");
-        } else {
-        }
-        if(categoryID == null){
+        if(idea.getCategory() == null){
             throw new Exception("Please choose a category");
         }
         
