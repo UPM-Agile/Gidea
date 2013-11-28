@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import upm.gidea.entities.Idea;
+import upm.gidea.exceptions.BusinessException;
 
 @Stateless
 public class IdeaLogicService  extends AbstractFacade<Idea> 
@@ -21,38 +22,34 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
     /**
      * Service that allows the creation of an idea by an entrepreneur
      * @param idea
-     * @param title
-     * @param description
-     * @param userId 
+     * @throws java.lang.Exception
      */
     @Override
     public void create(Idea idea) throws Exception
     {
         // validate inputs
         if (idea.getTitle() == null||idea.getTitle().isEmpty()) {
-            throw new Exception("Title is empty");   
+            throw new BusinessException("Title is empty");   
         }
         if(idea.getDescription() == null||idea.getDescription().isEmpty()){
-            throw new Exception("Please add a short description");
+            throw new BusinessException("Please add a short description");
         } 
         if (idea.getDescription().length() > 1000 ){
-            throw new Exception("The short description is too long");
+            throw new BusinessException("The short description is too long");
         }
         if(idea.getCategory() == null){
-            throw new Exception("Please choose a category");
+            throw new BusinessException("Please choose a category");
         }
         
-        
-        
         // save in the database
-    
+        super.create(idea);    
     }
     
     /**
      * Lists the ideas created by this user
      * @param userId 
      */
-    public List<Idea> viewOwnIdeas(Integer userId)
+    public List<Idea> viewOwnIdeas(Integer userId) throws Exception
     {
         List<Idea> list = new ArrayList<Idea>();
         
@@ -63,7 +60,7 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
      * Performs a request for approval for a created idea.
      * @param ideaId 
      */
-    public void askForIdeaPublishing(Integer ideaId)
+    public void askForIdeaPublishing(Integer ideaId) throws Exception
     {
         
     }        
@@ -72,21 +69,21 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
      * Changes the idea's status to published
      * @param ideaId 
      */
-    public void publishIdea(Integer ideaId)
+    public void publishIdea(Integer ideaId) throws Exception
     {
         
     }
-    public void edit(Integer ideaID){
+    public void edit(Integer ideaID) throws Exception{
         
     }
-    public void remove(Integer ideaID){
+    public void remove(Integer ideaID) throws Exception{
         
     }
-    public Idea find(Integer ideaID){
+    public Idea find(Integer ideaID) throws Exception{
         
         return null;
     }
-    public List<Idea> findall(String KeyWord){
+    public List<Idea> findall() throws Exception{
         List<Idea> found = new ArrayList<Idea>();
         return found;
     }

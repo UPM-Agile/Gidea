@@ -1,22 +1,37 @@
 package upm.gidea.entities;
 
 import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import upm.gidea.constants.IdeaStatus;
 
 /**
  * Business Idea
  */
 @Entity
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Idea.findAll", query = "SELECT i FROM Idea i"),
+    @NamedQuery(name = "Idea.findById", query = "SELECT i FROM Idea i WHERE i.id = :id"),
+    @NamedQuery(name = "Idea.findByTitle", query = "SELECT i FROM Idea i WHERE i.title like '%:title%'"),
+    @NamedQuery(name = "Idea.findByDescription", query = "SELECT i FROM Idea i WHERE i.description like '%:description%'"),
+    @NamedQuery(name = "Idea.findByOwnerId", query = "SELECT i FROM Idea i JOIN i.owner o WHERE o.id = :ownerId")})
 public class Idea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -24,19 +39,42 @@ public class Idea implements Serializable {
     private Integer id;
 
     @Size(max = 200)
-    @Column(name = "title")
+    @Column(name = "title", nullable = false)
     private String title;
     
     @Size(max = 1000)
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @ManyToOne(optional = false) //(mappedBy = "user_id")
+    @Column(name = "rejectionDate")
+    private String rejectionDate;    
+    
+    @OneToOne
     private User owner;
     
     @ManyToOne(optional = false)
     @JoinColumn(name = "idea", referencedColumnName = "category")
     private Category category;
+
+    @Basic
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private IdeaStatus status;
+    
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creationDate")
+    private Date creationDate;
+    
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "publishingDate")
+    private Date publishingDate;
+
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "editionDate")
+    private Date editionDate;
     
     /**
      *
@@ -72,11 +110,6 @@ public class Idea implements Serializable {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public String toString() {
-        return "entities.Idea[ id=" + id + " ]";
     }
 
     /**
@@ -125,7 +158,51 @@ public class Idea implements Serializable {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }    
+
+    public String getRejectionDate() {
+        return rejectionDate;
     }
-    
-    
+
+    public void setRejectionDate(String rejectionDate) {
+        this.rejectionDate = rejectionDate;
+    }
+
+    public IdeaStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(IdeaStatus status) {
+        this.status = status;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getPublishingDate() {
+        return publishingDate;
+    }
+
+    public void setPublishingDate(Date publishingDate) {
+        this.publishingDate = publishingDate;
+    }
+
+    public Date getEditionDate() {
+        return editionDate;
+    }
+
+    public void setEditionDate(Date editionDate) {
+        this.editionDate = editionDate;
+    }
+
+    @Override
+    public String toString() {
+        return "entities.Idea[ id=" + id + " ]";
+    }
+
 }
