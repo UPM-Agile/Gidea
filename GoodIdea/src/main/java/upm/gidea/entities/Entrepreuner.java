@@ -23,13 +23,13 @@ public class Entrepreuner implements Serializable {
     @OneToMany
     private ArrayList<Idea> listIdea;
     @Id
-    private Long entrepeuner_id;
+    private Integer entrepeuner_id;
 
     /**
      *
      * @return
      */
-    public Long getEntrepeuner_id() {
+    public Integer getEntrepeuner_id() {
         return entrepeuner_id;
     }
 
@@ -37,7 +37,7 @@ public class Entrepreuner implements Serializable {
      *
      * @param entrepeuner_id
      */
-    public void setEntrepeuner_id(Long entrepeuner_id) {
+    public void setEntrepeuner_id(Integer entrepeuner_id) {
         this.entrepeuner_id = entrepeuner_id;
     }
 
@@ -102,7 +102,7 @@ public class Entrepreuner implements Serializable {
      * @param listIdea
      * @param entrepeuner_id
      */
-    public Entrepreuner(String name, String lastname, ArrayList<Idea> listIdea, Long entrepeuner_id) {
+    public Entrepreuner(String name, String lastname, ArrayList<Idea> listIdea, Integer entrepeuner_id) {
         this.name = name;
         this.lastname = lastname;
         this.listIdea = listIdea;
