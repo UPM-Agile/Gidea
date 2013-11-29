@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import upm.gidea.constants.IdeaStatus;
 import upm.gidea.entities.Idea;
 import upm.gidea.exceptions.BusinessException;
 
@@ -51,7 +52,7 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
         idea.setOwner(userLogicService.getUserByEmail(owner));
         idea.setCategory(categoryLogicService.getDefaultCategory());
         idea.setCreationDate(new Date());
-        idea.setOwner(null);
+        idea.setStatus(IdeaStatus.CREATED);
         
         // save in the database
         super.create(idea);    
