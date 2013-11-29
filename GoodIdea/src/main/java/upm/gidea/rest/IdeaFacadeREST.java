@@ -23,16 +23,49 @@ import upm.gidea.logic.IdeaLogicService;
  */
 @Stateless
 @Path("idea")
-public class IdeaFacadeREST
-{
+public class IdeaFacadeREST {
+
     @EJB
     private IdeaLogicService logic;
-    
+
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Idea entity) throws Exception{
+    public void create(@PathParam("username") String username, Idea entity) throws Exception {
         try {
-            logic.create(entity);
+            logic.create(username, entity);
+        } catch (Exception ex) {
+            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @GET
+    @Path("own")
+    @Produces({"application/xml", "application/json"})
+    public List<Idea> findOwnIdeas(@PathParam("username") String username) {
+        try {
+            return logic.viewOwnIdeas(username);
+        } catch (Exception ex) {
+            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            return new ArrayList<Idea>();//TODO
+        }
+    }
+
+    public void askForIdeaPublishing(Integer ideaId) {
+        try {
+            logic.askForIdeaPublishing(ideaId);
+        } catch (Exception ex) {
+            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    /**
+     * Changes the idea's status to published
+     *
+     * @param ideaId
+     */
+    public void publishIdea(Integer ideaId) throws Exception {
+        try {
+            logic.publishIdea(ideaId);
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -45,7 +78,8 @@ public class IdeaFacadeREST
         try {
             logic.edit(entity);
         } catch (Exception ex) {
-            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IdeaFacadeREST.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -54,8 +88,10 @@ public class IdeaFacadeREST
     public void remove(@PathParam("id") Integer id) {
         try {
             logic.remove(logic.find(id));
+
         } catch (Exception ex) {
-            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IdeaFacadeREST.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -65,8 +101,10 @@ public class IdeaFacadeREST
     public Idea find(@PathParam("id") Integer id) {
         try {
             return logic.find(id);
+
         } catch (Exception ex) {
-            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IdeaFacadeREST.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return new Idea(); //TODO
         }
     }
@@ -76,6 +114,7 @@ public class IdeaFacadeREST
     public List<Idea> findAll() {
         try {
             return logic.findAll();
+
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
             return new ArrayList<Idea>();//TODO
@@ -88,8 +127,10 @@ public class IdeaFacadeREST
     public List<Idea> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         try {
             return logic.findRange(new int[]{from, to});
+
         } catch (Exception ex) {
-            Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(IdeaFacadeREST.class
+                    .getName()).log(Level.SEVERE, null, ex);
             return new ArrayList<Idea>();       //TODO
         }
     }
@@ -100,8 +141,10 @@ public class IdeaFacadeREST
     public String countREST() {
         try {
             return String.valueOf(logic.count());
+
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
+
             return ""; //TODO
         }
     }

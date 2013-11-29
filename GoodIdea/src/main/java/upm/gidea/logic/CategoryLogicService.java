@@ -23,4 +23,14 @@ public class CategoryLogicService extends AbstractFacade<Category>
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    public Category getDefaultCategory() throws Exception {
+        Category c = super.find(1);
+        if (c==null) {
+            c = new Category();
+            c.setName("General");
+            super.create(c);
+        }
+        return c;
+    }
 }

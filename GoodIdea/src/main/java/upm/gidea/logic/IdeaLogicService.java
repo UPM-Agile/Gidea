@@ -2,7 +2,9 @@ package upm.gidea.logic;
 
 import upm.gidea.persistence.AbstractFacade;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,6 +17,12 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
     @PersistenceContext(unitName = "upm.gidea_war_1.0-SNAPSHOT_PU")
     private EntityManager em;
 
+    @EJB
+    UserLogicService userLogicService;
+    
+    @EJB
+    CategoryLogicService categoryLogicService;
+    
     public IdeaLogicService() {
         super(Idea.class);
     }
@@ -24,8 +32,7 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
      * @param idea
      * @throws java.lang.Exception
      */
-    @Override
-    public void create(Idea idea) throws Exception
+    public void create(String owner, Idea idea) throws Exception
     {
         // validate inputs
         if (idea.getTitle() == null||idea.getTitle().isEmpty()) {
@@ -41,6 +48,11 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
             throw new BusinessException("Please choose a category");
         }
         
+        idea.setOwner(userLogicService.getUserByEmail(owner));
+        idea.setCategory(categoryLogicService.getDefaultCategory());
+        idea.setCreationDate(new Date());
+        idea.setOwner(null);
+        
         // save in the database
         super.create(idea);    
     }
@@ -49,11 +61,8 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
      * Lists the ideas created by this user
      * @param userId 
      */
-    public List<Idea> viewOwnIdeas(Integer userId) throws Exception
-    {
-        List<Idea> list = new ArrayList<Idea>();
-        
-        return list;
+    public List<Idea> viewOwnIdeas(String username) {
+        return userLogicService.getUserByEmail(username).getIdeas();
     }
     
     /**
@@ -73,6 +82,7 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
     {
         
     }
+
     public void edit(Integer ideaID) throws Exception{
         
     }
@@ -92,4 +102,5 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
     protected EntityManager getEntityManager() {
         return em;
     }
+
 }

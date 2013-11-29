@@ -2,6 +2,7 @@ package upm.gidea.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -48,7 +49,7 @@ public class User implements Serializable
     private String email;
 
     @OneToMany
-    private ArrayList<Idea> ideas;
+    private List<Idea> ideas;
 
 
     /**
@@ -88,7 +89,7 @@ public class User implements Serializable
      * @return
      */
     @XmlTransient
-    public ArrayList<Idea> getIdeas() {
+    public List<Idea> getIdeas() {
         return ideas;
     }
 

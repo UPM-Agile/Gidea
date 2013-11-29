@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
@@ -46,14 +47,16 @@ public class Idea implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "rejectionDate")
-    private String rejectionDate;    
+    private Date rejectionDate;    
     
     @OneToOne
     private User owner;
     
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idea", referencedColumnName = "category")
+    @OneToOne
+    @JoinColumn(name = "category_id", referencedColumnName = "ID")
     private Category category;
 
     @Basic
@@ -160,11 +163,11 @@ public class Idea implements Serializable {
         this.owner = owner;
     }    
 
-    public String getRejectionDate() {
+    public Date getRejectionDate() {
         return rejectionDate;
     }
 
-    public void setRejectionDate(String rejectionDate) {
+    public void setRejectionDate(Date rejectionDate) {
         this.rejectionDate = rejectionDate;
     }
 

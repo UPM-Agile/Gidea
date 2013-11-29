@@ -32,8 +32,7 @@ var app = {
         idAttribute: 'id',
         defaults: {
             title: "",
-            description: "",
-            rejectionDate: ""
+            description: ""
         },
         toViewJson: function() {
             var result = this.toJSON(); // displayName property is used to render item in the list
@@ -350,8 +349,7 @@ $(function() {
             return {
                 id: $('#id').val(),
                 title: $('#title').val(),
-                description: $('#description').val(),
-                username: $('#username').val()
+                description: $('#description').val()
             };
         }
     });
