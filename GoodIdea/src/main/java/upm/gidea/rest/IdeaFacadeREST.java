@@ -30,9 +30,9 @@ public class IdeaFacadeREST {
 
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(@PathParam("username") String username, Idea entity) throws Exception {
+    public void create(Idea entity) throws Exception {
         try {
-            logic.create(username, entity);
+            logic.create(entity);
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }

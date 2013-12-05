@@ -33,7 +33,7 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
      * @param idea
      * @throws java.lang.Exception
      */
-    public void create(String owner, Idea idea) throws Exception
+    public void create(Idea idea) throws Exception
     {
         // validate inputs
         if (idea.getTitle() == null||idea.getTitle().isEmpty()) {
@@ -48,8 +48,8 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
         if(idea.getCategory() == null){
             throw new BusinessException("Please choose a category");
         }
-        
-        idea.setOwner(userLogicService.getUserByEmail(owner));
+        //String owner
+        //idea.setOwner(userLogicService.getUserByEmail(owner));
         idea.setCategory(categoryLogicService.getDefaultCategory());
         idea.setCreationDate(new Date());
         idea.setStatus(IdeaStatus.CREATED);
