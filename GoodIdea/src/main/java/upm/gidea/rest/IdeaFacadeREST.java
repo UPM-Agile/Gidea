@@ -15,7 +15,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import upm.gidea.entities.Idea;
+import upm.gidea.logic.CategoryLogicService;
 import upm.gidea.logic.IdeaLogicService;
+import upm.gidea.web.IdeaWeb;
 
 /**
  *
@@ -27,11 +29,12 @@ public class IdeaFacadeREST {
 
     @EJB
     private IdeaLogicService logic;
-
+    
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Idea entity) throws Exception {
+    public void create(IdeaWeb entity) throws Exception {
         try {
+            logic.validateData(entity);
             logic.create(entity);
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
@@ -41,12 +44,12 @@ public class IdeaFacadeREST {
     @GET
     @Path("own")
     @Produces({"application/xml", "application/json"})
-    public List<Idea> findOwnIdeas(@PathParam("username") String username) {
+    public List<IdeaWeb> findOwnIdeas(@PathParam("username") String username) {
         try {
             return logic.viewOwnIdeas(username);
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<Idea>();//TODO
+            return new ArrayList<IdeaWeb>();//TODO
         }
     }
 
@@ -108,16 +111,16 @@ public class IdeaFacadeREST {
             return new Idea(); //TODO
         }
     }
-
+    
     @GET
     @Produces({"application/xml", "application/json"})
-    public List<Idea> findAll() {
+    public List<IdeaWeb> findAll() throws Exception {
         try {
-            return logic.findAll();
+            return logic.findAllWeb();
 
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<Idea>();//TODO
+            return new ArrayList<IdeaWeb>();//TODO
         }
     }
 

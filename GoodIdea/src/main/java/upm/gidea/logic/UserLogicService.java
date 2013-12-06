@@ -28,4 +28,8 @@ public class UserLogicService extends AbstractFacade<User> {
     public User getUserByEmail(String username) {
         return em.createNamedQuery("User.findByEmail",User.class).setParameter("email", username).getSingleResult();
     }
+    
+    
+    
+    
 }

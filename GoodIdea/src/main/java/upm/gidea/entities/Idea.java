@@ -21,12 +21,12 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import upm.gidea.constants.IdeaStatus;
+import upm.gidea.web.IdeaWeb;
 
 /**
  * Business Idea
  */
 @Entity
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Idea.findAll", query = "SELECT i FROM Idea i"),
     @NamedQuery(name = "Idea.findById", query = "SELECT i FROM Idea i WHERE i.id = :id"),
@@ -53,6 +53,7 @@ public class Idea implements Serializable {
     private Date rejectionDate;    
     
     @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "ID")
     private User owner;
     
     @OneToOne
@@ -207,5 +208,6 @@ public class Idea implements Serializable {
     public String toString() {
         return "entities.Idea[ id=" + id + " ]";
     }
+
 
 }

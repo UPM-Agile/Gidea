@@ -1,5 +1,6 @@
 package upm.gidea.logic;
 
+import java.text.SimpleDateFormat;
 import upm.gidea.persistence.AbstractFacade;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,92 +12,87 @@ import javax.persistence.PersistenceContext;
 import upm.gidea.constants.IdeaStatus;
 import upm.gidea.entities.Idea;
 import upm.gidea.exceptions.BusinessException;
+import upm.gidea.web.IdeaWeb;
+import upm.gidea.entities.Category;
+import upm.gidea.entities.User;
 
 @Stateless
-public class IdeaLogicService  extends AbstractFacade<Idea> 
-{    
+public class IdeaLogicService extends AbstractFacade<Idea> {
+
     @PersistenceContext(unitName = "upm.gidea_war_1.0-SNAPSHOT_PU")
     private EntityManager em;
 
     @EJB
     UserLogicService userLogicService;
-    
+
     @EJB
     CategoryLogicService categoryLogicService;
-    
+
     public IdeaLogicService() {
         super(Idea.class);
     }
 
     /**
      * Service that allows the creation of an idea by an entrepreneur
+     *
      * @param idea
      * @throws java.lang.Exception
      */
-    public void create(Idea idea) throws Exception
-    {
-        // validate inputs
-        if (idea.getTitle() == null||idea.getTitle().isEmpty()) {
-            throw new BusinessException("Title is empty");   
-        }
-        if(idea.getDescription() == null||idea.getDescription().isEmpty()){
-            throw new BusinessException("Please add a short description");
-        } 
-        if (idea.getDescription().length() > 1000 ){
-            throw new BusinessException("The short description is too long");
-        }
-        if(idea.getCategory() == null){
-            throw new BusinessException("Please choose a category");
-        }
-        //String owner
-        //idea.setOwner(userLogicService.getUserByEmail(owner));
-        idea.setCategory(categoryLogicService.getDefaultCategory());
-        idea.setCreationDate(new Date());
+    public void create(IdeaWeb ideaWeb) throws Exception {
+        Idea idea = this.toEntity(ideaWeb);
         idea.setStatus(IdeaStatus.CREATED);
-        
-        // save in the database
-        super.create(idea);    
-    }
-    
-    /**
-     * Lists the ideas created by this user
-     * @param userId 
-     */
-    public List<Idea> viewOwnIdeas(String username) {
-        return userLogicService.getUserByEmail(username).getIdeas();
-    }
-    
-    /**
-     * Performs a request for approval for a created idea.
-     * @param ideaId 
-     */
-    public void askForIdeaPublishing(Integer ideaId) throws Exception
-    {
-        
-    }        
-    
-    /**
-     * Changes the idea's status to published
-     * @param ideaId 
-     */
-    public void publishIdea(Integer ideaId) throws Exception
-    {
-        
+        idea.setCreationDate(new Date());
+        super.create(idea);
     }
 
-    public void edit(Integer ideaID) throws Exception{
-        
+    /**
+     * Lists the ideas created by this user
+     *
+     * @param username
+     * @return
+     */
+    public List<IdeaWeb> viewOwnIdeas(String username) {
+        List<Idea> listIdea = userLogicService.getUserByEmail(username).getIdeas();
+        List<IdeaWeb> listIdeaWeb = new ArrayList<>();
+        for (Idea idea : listIdea) {
+            listIdeaWeb.add(this.toWeb(idea));
+        }
+        return listIdeaWeb;
     }
-    public void remove(Integer ideaID) throws Exception{
-        
+
+    /**
+     * Performs a request for approval for a created idea.
+     *
+     * @param ideaId
+     */
+    public void askForIdeaPublishing(Integer ideaId) throws Exception {
+
     }
-    public Idea find(Integer ideaID) throws Exception{
-        
+
+    /**
+     * Changes the idea's status to published
+     *
+     * @param ideaId
+     */
+    public void publishIdea(Integer ideaId) throws Exception {
+
+    }
+
+    public void edit(Integer ideaID) throws Exception {
+
+    }
+
+    public void remove(Integer ideaID) throws Exception {
+
+    }
+
+    public Idea find(Integer ideaID) throws Exception {
+
         return null;
     }
-    public List<Idea> findall() throws Exception{
-        List<Idea> found = new ArrayList<Idea>();
-        return found;
+
+    public List<IdeaWeb> findAllWeb() throws Exception {
+        return toWeb(findAll());
     }
 
     @Override
@@ -104,4 +100,87 @@ public class IdeaLogicService  extends AbstractFacade<Idea>
         return em;
     }
 
+    public void validateData(IdeaWeb idea) throws Exception {
+        // validate inputs
+        if (idea.getTitle() == null || idea.getTitle().isEmpty()) {
+            throw new BusinessException("Title is empty");
+        }
+        if (idea.getDescription() == null || idea.getDescription().isEmpty()) {
+            throw new BusinessException("Please add a short description");
+        }
+        if (idea.getDescription().length() > 1000) {
+            throw new BusinessException("The short description is too long");
+        }
+        if (idea.getCategory() == null) {
+            throw new BusinessException("Please choose a category");
+        }
+    }
+
+    /*
+     * Convert an Idea object to Idea Web Object
+     */
+    private Idea toEntity(IdeaWeb obj) throws Exception {
+        /*
+         *Creating object Idea
+         */
+        Idea i = new Idea();
+
+        /*
+         *Obtaining object User and Category
+         */
+        String category = obj.getCategory();
+        if (category != null) {
+            Category cat = categoryLogicService.findByName(category);
+            i.setCategory(cat);
+        }
+        User u = userLogicService.getUserByEmail(obj.getOwner());
+
+        i.setOwner(u);
+        i.setDescription(obj.getDescription());
+        i.setTitle(obj.getTitle());
+        String status = obj.getStatus();
+        if (status != null) {
+            i.setStatus(IdeaStatus.valueOf(status));
+        }
+        String date = obj.getPublishingDate();
+        if (date != null) {
+            i.setPublishingDate(SimpleDateFormat.getInstance().parse(date));
+        }
+        date = obj.getEditionDate();
+        if (date != null) {
+            i.setEditionDate(SimpleDateFormat.getInstance().parse(date));
+        }
+        date = obj.getRejectionDate();
+        if (date != null) {
+            i.setRejectionDate(SimpleDateFormat.getInstance().parse(date));
+        }
+        return i;
+    }
+
+    /*
+     * Convert an Idea object to Idea Web Object
+     */
+    private IdeaWeb toWeb(Idea obj) {
+        IdeaWeb w = new IdeaWeb();
+        w.setCategory(obj.getCategory().getName());
+        w.setOwner(obj.getOwner().getEmail());
+        w.setTitle(obj.getTitle());
+        w.setDescription(obj.getDescription());
+        //TODO COMPLETE
+        return w;
+    }
+
+    /**
+     * Convert entity list to web objects
+     *
+     * @param all
+     * @return
+     */
+    private List<IdeaWeb> toWeb(List<Idea> all) {
+        List<IdeaWeb> result = new ArrayList<>();
+        for (Idea idea : all) {
+            result.add(toWeb(idea));
+        }
+        return result;
+    }
 }
