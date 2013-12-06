@@ -7,9 +7,10 @@ import upm.gidea.entities.Idea;
  *
  * @author user
  */
+@XmlRootElement
 public class IdeaWeb {
 
-    private Integer id;
+    private String id;
 
     private String title;
 
@@ -33,11 +34,11 @@ public class IdeaWeb {
     }
 
     
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

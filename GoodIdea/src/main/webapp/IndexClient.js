@@ -1,7 +1,6 @@
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Code that is working better!!!
+ * Friday.
  */
 
 var app = {
@@ -31,8 +30,11 @@ var app = {
         urlRoot: "http://localhost:8080/GoodIdea/rest/idea/",
         idAttribute: 'id',
         defaults: {
+            id: "",
             title: "",
-            description: ""
+            description: "",
+            category:"General",
+            owner: ""
         },
         toViewJson: function() {
             var result = this.toJSON(); // displayName property is used to render item in the list
@@ -193,18 +195,16 @@ var app = {
                 });
             } else {
                 this.model.save();
-                this.model.el.parent().parent().trigger("update");
+                self.options.navigate(self.model.id);
+                //this.model.el.parent().parent().trigger("update");
             }
             return false;
         },
         drop: function() {
             this.model.destroy({
                 success: function() {
-                    /*
-                     *  TODO : put your code here
-                     *  f.e. alert("Model is successfully deleted");
-                     */  
-                    window.history.back();
+                    alert("Model is successfully deleted");
+                    //window.location="/GoodIdea/"
                 }
             });
             return false;
@@ -344,9 +344,14 @@ $(function() {
         },
         getData: function() {
             return {
+                /**
+                 * Add all attributes from entity to create it
+                 */
                 id: $('#id').val(),
                 title: $('#title').val(),
-                description: $('#description').val()
+                description: $('#description').val(),
+                category: $('#category').val(),
+                owner: $('#owner').val()  // get from session
             };
         }
     });

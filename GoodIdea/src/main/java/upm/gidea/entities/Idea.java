@@ -33,6 +33,7 @@ import upm.gidea.web.IdeaWeb;
     @NamedQuery(name = "Idea.findByTitle", query = "SELECT i FROM Idea i WHERE i.title like '%:title%'"),
     @NamedQuery(name = "Idea.findByDescription", query = "SELECT i FROM Idea i WHERE i.description like '%:description%'"),
     @NamedQuery(name = "Idea.findByOwnerId", query = "SELECT i FROM Idea i JOIN i.owner o WHERE o.id = :ownerId")})
+@XmlRootElement
 public class Idea implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

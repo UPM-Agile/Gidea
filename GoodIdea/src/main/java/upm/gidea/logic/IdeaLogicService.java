@@ -32,10 +32,15 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
         super(Idea.class);
     }
 
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
     /**
      * Service that allows the creation of an idea by an entrepreneur
      *
-     * @param idea
+     * @param ideaWeb
      * @throws java.lang.Exception
      */
     public void create(IdeaWeb ideaWeb) throws Exception {
@@ -78,28 +83,27 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
 
     }
 
-    public void edit(Integer ideaID) throws Exception {
-
+    public void editWeb(IdeaWeb idea) throws Exception {
+        super.edit(toEntity(idea));
     }
 
-    public void remove(Integer ideaID) throws Exception {
-
+    public void removeWeb(IdeaWeb idea) throws Exception {
+        super.remove(toEntity(idea));
     }
 
-    public Idea find(Integer ideaID) throws Exception {
-
-        return null;
+    public IdeaWeb findWeb(Integer ideaID) throws Exception {
+        return toWeb(find(ideaID));
     }
-
+    
     public List<IdeaWeb> findAllWeb() throws Exception {
         return toWeb(findAll());
     }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+    
+    public List<IdeaWeb> findRangeWeb(int[] args) throws Exception {
+        return toWeb(findRange(args));
     }
 
+        
     public void validateData(IdeaWeb idea) throws Exception {
         // validate inputs
         if (idea.getTitle() == null || idea.getTitle().isEmpty()) {
@@ -124,6 +128,11 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
          *Creating object Idea
          */
         Idea i = new Idea();
+
+        if (obj.getId() != null && !"".equals(obj.getId().trim())) {
+            Integer id = Integer.parseInt(obj.getId());
+            i.setId(id);
+        }
 
         /*
          *Obtaining object User and Category
@@ -162,6 +171,7 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
      */
     private IdeaWeb toWeb(Idea obj) {
         IdeaWeb w = new IdeaWeb();
+        w.setId("" + obj.getId());
         w.setCategory(obj.getCategory().getName());
         w.setOwner(obj.getOwner().getEmail());
         w.setTitle(obj.getTitle());

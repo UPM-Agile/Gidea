@@ -1,8 +1,3 @@
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,31 +48,37 @@ and open the template in the editor.
         <script type='text/template' id='thead'>
             <thead>
             <tr>
-            <th>id</th>
             <th>title</th>
             <th>description</th>
+            <th>category</th>
+            <th>owner</th>
             </tr>
             </thead>
         </script>
         <script type='text/template' id='tpl-idea-list-item'>
-            <td><a href='#<%= id %>'><%= id %></a></td>
-            <td><%= title %></td>
+            <td><a href='#<%= id %>'><%= title %></a></td>
             <td><%= description %></td>
+            <td><%= category %></td>
+            <td><%= owner%></td>
         </script>
 
         <script type='text/template' id='tpl-idea-details'>
             <div>
             <table>
             <tbody>
-            <tr><td>Id</td>
-            <td>
-            <input type='text' id='id' name='id' value='<%= typeof(id)!== "undefined" ? id : "" %>'  />
-            </td>
-            </tr>
+            <tr><td></td>
+            <input type='hidden' id='id' name='id' value='<%= id%>'/></td></tr>
+            <tr><td>Title</td>
+            <td><input type='text' id='title' name='title' value='<%= title %>'/></td></tr>
             <tr>
-            <td>title</td><td><input type='text' id='title' name='title' value='<%= title %>'/></td></tr>
+            <td>Description</td>
+            <td><input type='text' id='description' name='description' value='<%= description %>'/></td></tr>
             <tr>
-            <td>description</td><td><input type='text' id='description' name='description' value='<%= description %>'/></td></tr>
+            <td>Category</td>
+            <td><input type='text' id='category' name='category' value='<%= category %>'/></td></tr>
+            <tr>
+            <td>owner</td>
+            <td><input type='text' id='owner' name='owner' value='<%= owner %>'/></td></tr>
             </tbody>
             </table>
             <!--

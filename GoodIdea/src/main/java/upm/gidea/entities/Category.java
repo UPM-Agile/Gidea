@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Category for Business Ideas
@@ -20,6 +21,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Category.findByName", query = "SELECT c FROM Category c WHERE c.name = :name")})
 
 
+@XmlRootElement
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;

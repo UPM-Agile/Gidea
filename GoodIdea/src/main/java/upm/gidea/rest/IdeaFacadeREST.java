@@ -14,8 +14,6 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import upm.gidea.entities.Idea;
-import upm.gidea.logic.CategoryLogicService;
 import upm.gidea.logic.IdeaLogicService;
 import upm.gidea.web.IdeaWeb;
 
@@ -75,11 +73,10 @@ public class IdeaFacadeREST {
     }
 
     @PUT
-    @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Idea entity) {
+    public void edit(IdeaWeb entity) {
         try {
-            logic.edit(entity);
+            logic.editWeb(entity);
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -101,14 +98,14 @@ public class IdeaFacadeREST {
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
-    public Idea find(@PathParam("id") Integer id) {
+    public IdeaWeb find(@PathParam("id") Integer id) {
         try {
-            return logic.find(id);
+            return logic.findWeb(id);
 
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class
                     .getName()).log(Level.SEVERE, null, ex);
-            return new Idea(); //TODO
+            return new IdeaWeb(); //TODO
         }
     }
     
@@ -120,21 +117,21 @@ public class IdeaFacadeREST {
 
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<IdeaWeb>();//TODO
+            return new ArrayList<>();//TODO
         }
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
-    public List<Idea> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<IdeaWeb> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         try {
-            return logic.findRange(new int[]{from, to});
+            return logic.findRangeWeb(new int[]{from, to});
 
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class
                     .getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<Idea>();       //TODO
+            return new ArrayList<>();       //TODO
         }
     }
 
