@@ -28,6 +28,11 @@ public class IdeaFacadeREST {
     @EJB
     private IdeaLogicService logic;
     
+    /**
+     *
+     * @param entity
+     * @throws Exception
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
     public void create(IdeaWeb entity) throws Exception {
@@ -39,6 +44,11 @@ public class IdeaFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @GET
     @Path("own")
     @Produces({"application/xml", "application/json"})
@@ -47,7 +57,7 @@ public class IdeaFacadeREST {
             return logic.viewOwnIdeas(username);
         } catch (Exception ex) {
             Logger.getLogger(IdeaFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<IdeaWeb>();//TODO
+            return new ArrayList<>();//TODO
         }
     }
 
@@ -63,6 +73,7 @@ public class IdeaFacadeREST {
      * Changes the idea's status to published
      *
      * @param ideaId
+     * @throws java.lang.Exception
      */
     public void publishIdea(Integer ideaId) throws Exception {
         try {
@@ -72,6 +83,10 @@ public class IdeaFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param entity
+     */
     @PUT
     @Consumes({"application/xml", "application/json"})
     public void edit(IdeaWeb entity) {
@@ -83,6 +98,10 @@ public class IdeaFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
@@ -95,6 +114,11 @@ public class IdeaFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -109,6 +133,11 @@ public class IdeaFacadeREST {
         }
     }
     
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
     @GET
     @Produces({"application/xml", "application/json"})
     public List<IdeaWeb> findAll() throws Exception {
@@ -121,6 +150,12 @@ public class IdeaFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @return
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
@@ -135,6 +170,10 @@ public class IdeaFacadeREST {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("count")
     @Produces("text/plain")

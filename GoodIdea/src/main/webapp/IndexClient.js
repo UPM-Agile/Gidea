@@ -195,8 +195,9 @@ var app = {
                 });
             } else {
                 this.model.save();
-                self.options.navigate(self.model.id);
-                //this.model.el.parent().parent().trigger("update");
+                this.model.el.parent().parent().trigger("update");
+                        
+                        
             }
             return false;
         },

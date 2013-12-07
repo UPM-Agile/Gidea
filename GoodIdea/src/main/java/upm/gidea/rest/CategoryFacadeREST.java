@@ -16,6 +16,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import upm.gidea.entities.Category;
 import upm.gidea.logic.CategoryLogicService;
+import upm.gidea.web.CategoryWeb;
 
 /**
  *
@@ -28,27 +29,40 @@ public class CategoryFacadeREST {
     @EJB
     CategoryLogicService logic;
 
+    /**
+     *
+     * @param entity
+     */
     @POST
     @Consumes({"application/xml", "application/json"})
-    public void create(Category entity) {
+    public void create(CategoryWeb entity) {
         try {
+            logic.validateData(entity);
             logic.create(entity);
         } catch (Exception ex) {
             Logger.getLogger(CategoryFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     *
+     * @param entity
+     */
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(@PathParam("id") Integer id, Category entity) {
+    public void edit(CategoryWeb entity) {
         try {
-            logic.edit(entity);
+            logic.editWeb(entity);
         } catch (Exception ex) {
             Logger.getLogger(CategoryFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    /**
+     *
+     * @param id
+     */
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
@@ -59,6 +73,11 @@ public class CategoryFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     @GET
     @Path("{id}")
     @Produces({"application/xml", "application/json"})
@@ -74,15 +93,24 @@ public class CategoryFacadeREST {
     @GET
 
     @Produces({"application/xml", "application/json"})
-    public List<Category> findAll() {
+    public List<CategoryWeb> findAll() {
         try {
-            return logic.findAll();
+            return logic.findAllWeb();
         } catch (Exception ex) {
             Logger.getLogger(CategoryFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<Category>(); //TODO
+            return new ArrayList<>(); //TODO
         }
     }
+    /*
+     * Is necessary for Category????
+     */
 
+    /**
+     *
+     * @param from
+     * @param to
+     * @return
+     */
     @GET
     @Path("{from}/{to}")
     @Produces({"application/xml", "application/json"})
@@ -91,10 +119,14 @@ public class CategoryFacadeREST {
             return logic.findRange(new int[]{from, to});
         } catch (Exception ex) {
             Logger.getLogger(CategoryFacadeREST.class.getName()).log(Level.SEVERE, null, ex);
-            return new ArrayList<Category>(); //TODO            
+            return new ArrayList<>(); //TODO            
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
     @Path("count")
     @Produces("text/plain")
