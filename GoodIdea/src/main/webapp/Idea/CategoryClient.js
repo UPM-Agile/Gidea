@@ -94,7 +94,7 @@ var app = {
 (function(views) {
     
     views.ListView = Backbone.View.extend({
-        tagName: 'tbody',
+        tagName: 'select',
         initialize: function() {
             
             this.model.bind("reset", this.render, this);
@@ -121,7 +121,7 @@ var app = {
     });
     
     views.ListItemView = Backbone.View.extend({
-        tagName: 'tr',
+        tagName: 'option',
         initialize: function() {
             this.model.bind("change", this.render, this);
             this.model.bind("destroy", this.close, this);
@@ -277,7 +277,7 @@ $(function() {
                         // tpl-category-list-itemis template identifier for item
                         templateName: '#tpl-category-list-item'
                     });
-                    $('#datatable').html(self.listView.render().el).append(_.template($('#thead').html())());
+                    $('#datatable').html(self.listView.render().el);
                     if (self.requestedId) {
                         self.details(self.requestedId);
                     }

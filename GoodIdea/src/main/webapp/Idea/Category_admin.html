@@ -12,19 +12,13 @@
     <body>
 
         <div class="form-group" id="datatable">
-            <label for="category">
-                Category</label>
-        </div>
-
-        <script type='text/template' id='thead'>
+            <label for="category">Category</label>
             <select class="form-control" id="category">
             </select>
-        </script>
+        </div>
 
         <script type='text/template' id='tpl-category-list-item'>
-            <select class="form-control" id="category">
             <option id='#<%= id %>'><%= name %></option>
-    </select>
         </script>
         
         <script type='text/template' id='tpl-create'>
