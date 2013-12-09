@@ -1,0 +1,96 @@
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <script src='../js/libs/underscore.js/underscore-min.js'></script>
+        <script src='../js/libs/jquery/jquery.min.js'></script>
+        <script src='../js/libs/backbone.js/backbone-min.js'></script>
+        <script src='UserClient.js'></script>
+    </head>
+    <body>
+        <div id='header'></div>
+
+
+        <div id='content'></div>
+        <div id='create'></div>
+
+        <table id='datatable' class='tablesorter-blue'>
+        </table>
+        <div class='pager' id='pager'>
+            <img src='img/tablesorter/first.png' class='first' alt='First'/>
+            <img src='img/tablesorter/prev.png' class='prev' alt='Prev'/>
+            <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
+            <img src='img/tablesorter/next.png' class='next' alt='Next'/>
+            <img src='img/tablesorter/last.png' class='last' alt='Last'/>
+            <select class='pagesize'>
+                <option selected='selected' value='10'>10</option>
+                <option value='20'>20</option>
+                <option value='30'>30</option>
+                <option value='40'>40</option>
+            </select>
+        </div>
+        <br>
+
+        <div id='details'></div>
+
+        <!-- Templates -->
+        <script type='text/template' id='tpl-user-create'>
+            <!--
+            Put your controls to create new entity here.
+
+            Class 'new' is used to listen on events in JS code.
+            -->
+            <button class='new'>Create</button>
+        </script>
+
+        <script type='text/template' id='thead'>
+          <thead>
+          <tr>
+          <th>name</th>
+          <th>lastname</th>
+          <th>email</th>
+          <th>password</th>
+          </tr>
+          </thead>
+        </script>
+
+        <script type='text/template' id='tpl-user-list-item'>
+           <td><a href='#<%= id %>'><%= name %></a></td>
+           <td><%= lastname %></td>
+           <td><%= email %></td>
+           <td><%= password%></td>
+        </script>
+        <script type='text/template' id='tpl-user-details'>
+            <div>
+            <label>Id:</label>
+            <tr><td></td>
+            <input type='hidden' id='id' name='id' value='<%= id%>'/></td></tr>
+            <label>Name:</label>
+            <input type='text' id='name' name='name' value='<%= name %>'/>
+            <!--
+            Put your editing controls for model
+            attribute data (text fields, ...) here
+            <label>lastname:</label>
+            <input type='text' id='lastname' name='lastname' value='<%= lastname %>'/>
+            <label>email:</label>
+            <input type='text' id='email' name='email' value='<%= email %>'/>
+            <label>password:</label>
+            <input type='text' id='password' name='password' value='<%= password %>'/>-->
+            <!--
+            Put your controls to create new entity here.
+            Classes 'save' and 'delete' are used to listen on events in JS code.
+            -->
+            <button  class='save'>Save</button>
+            <button  class='delete'>Delete</button>
+            </div>
+        </script>
+
+
+    </body>
+</html>

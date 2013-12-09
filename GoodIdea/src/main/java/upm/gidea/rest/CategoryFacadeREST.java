@@ -90,6 +90,10 @@ public class CategoryFacadeREST {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @GET
 
     @Produces({"application/xml", "application/json"})

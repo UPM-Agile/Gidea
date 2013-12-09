@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package upm.gidea.web;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,17 +13,48 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlRootElement
 public class UserWeb {
-    private String username;
+
+    private String id;
+
+    private String name;
+    private String lastname;
+
+    private String email;
     private String password;
+
     public UserWeb() {
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getId() {
+        return id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     public void setPassword(String password) {
@@ -34,6 +64,5 @@ public class UserWeb {
     public String getPassword() {
         return password;
     }
-    
-    
+
 }
