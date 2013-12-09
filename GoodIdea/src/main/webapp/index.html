@@ -3,14 +3,19 @@
     <head>
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel='stylesheet' href='http://mottie.github.com/tablesorter/css/theme.blue.css'>
-        <link rel='stylesheet' href='http://mottie.github.com/tablesorter/addons/pager/jquery.tablesorter.pager.css'>
+        <link rel='stylesheet' href='css/tablesorter/theme.blue.css'>
+        <link rel='stylesheet' href='css/tablesorter/jquery.tablesorter.pager.css'>
         <script src='js/libs/underscore.js/underscore-min.js'></script>
         <script src='js/libs/jquery/jquery.min.js'></script>
         <script src='js/libs/backbone.js/backbone-min.js'></script>
-        <script src='http://mottie.github.com/tablesorter/js/jquery.tablesorter.min.js'></script>
-        <script src='http://mottie.github.com/tablesorter/addons/pager/jquery.tablesorter.pager.js'></script>
+        <script src='js/libs/tablesorter/jquery.tablesorter.min.js'></script>
+        <script src='js/libs/tablesorter/jquery.tablesorter.pager.js'></script>
         <script src='IndexClient.js'></script>
+        <!-- 
+        
+        <script src='Idea/CategoryClient.js'></script>
+        
+        -->
     </head>
     <body>
         <div id='create'></div>
@@ -18,11 +23,11 @@
         <table id='datatable' class='tablesorter-blue'>
         </table>
         <div class='pager' id='pager'>
-            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/first.png' class='first' alt='First'/>
-            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/prev.png' class='prev' alt='Prev'/>
+            <img src='img/tablesorter/first.png' class='first' alt='First'/>
+            <img src='img/tablesorter/prev.png' class='prev' alt='Prev'/>
             <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/next.png' class='next' alt='Next'/>
-            <img src='http://mottie.github.com/tablesorter/addons/pager/icons/last.png' class='last' alt='Last'/>
+            <img src='img/tablesorter/next.png' class='next' alt='Next'/>
+            <img src='img/tablesorter/last.png' class='last' alt='Last'/>
             <select class='pagesize'>
                 <option selected='selected' value='10'>10</option>
                 <option value='20'>20</option>
@@ -75,7 +80,13 @@
             <td><input type='text' id='description' name='description' value='<%= description %>'/></td></tr>
             <tr>
             <td>Category</td>
-            <td><input type='text' id='category' name='category' value='<%= category %>'/></td></tr>
+            <td>              
+                <div class="form-group" id="category_datatable">
+                     <select class="form-control" id="category" value='<%= category %>'>
+                     </select>
+                 </div>
+            
+            </td></tr>
             <tr>
             <td>owner</td>
             <td><input type='text' id='owner' name='owner' value='<%= owner %>'/></td></tr>
@@ -90,6 +101,15 @@
             </div>
         </script>
 
-
+        <!-- CATEGORY COMBO BOX -->
+        <script type='text/template' id='tpl-category-list-item'>
+            <option id='#<%= id %>'><%= name %></option>
+        </script>
+        
+        <script type='text/template' id='category_tpl-create'>
+        </script>
+        <script type='text/template' id='category_tpl-details'>
+        </script>                
+        
     </body>
 </html>

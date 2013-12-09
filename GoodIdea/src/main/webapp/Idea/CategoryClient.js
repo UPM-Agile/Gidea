@@ -261,7 +261,7 @@ $(function() {
             var self = this;
             $('#create').html(new views.CreateView({
                 // tpl-create is template identifier for 'create' block
-                templateName: '#tpl-create',
+                templateName: '#category_tpl-create',
                 navigate: function() {
                     self.navigate('new', true);
                 }
@@ -277,7 +277,7 @@ $(function() {
                         // tpl-category-list-itemis template identifier for item
                         templateName: '#tpl-category-list-item'
                     });
-                    $('#datatable').html(self.listView.render().el);
+                    $('#category_datatable').html(self.listView.render().el);
                     if (self.requestedId) {
                         self.details(self.requestedId);
                     }
@@ -292,7 +292,7 @@ $(function() {
                         // Number of visible rows - default is 10
                         size: 10
                     };
-                    $('#datatable').tablesorter({widthFixed: true,
+                    $('#category_datatable').tablesorter({widthFixed: true,
                         widgets: ['zebra']}).
                             tablesorterPager(pagerOptions);
                     */
