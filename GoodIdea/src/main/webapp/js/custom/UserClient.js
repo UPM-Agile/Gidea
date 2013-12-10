@@ -34,8 +34,7 @@ var app = {
             email:"",
             name: "",
             lastname: "",
-            password: "",
-            role: ""
+            password: ""
         },
         toViewJson: function() {
             var result = this.toJSON(); // displayName property is used to render item in the list
@@ -353,8 +352,7 @@ $(function() {
                 email: $('#email').val(),
                 name: $('#name').val(),
                 lastname: $('#lastname').val(),
-                password: $('#password').val(),  // get from session
-                role: $('#role').val()
+                password: $('#password').val()  // get from session
             };
         }
     });

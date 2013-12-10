@@ -53,11 +53,13 @@ public class User implements Serializable {
     @Column(name = "email")
     private String email;
 
-    @Column(name = " password")
+    @Column(name = "password")
     private String password;
 
     @OneToMany
     private List<Idea> ideas;
+ @Column(name = "role")
+    private String role;
 
     /**
      *
@@ -151,6 +153,14 @@ public class User implements Serializable {
         return password;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
     @Override
     public String toString() {
         return "entities.User[ id=" + id + " ]";
@@ -172,15 +182,17 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Integer id, String name, String lastname, String email, String password, List<Idea> ideas) {
+    public User(Integer id, String name, String lastname, String email, String password, List<Idea> ideas, String role) {
         this.id = id;
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.ideas = ideas;
-
+        this.role = role;
     }
+
+  
 
     /**
      *

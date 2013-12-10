@@ -96,6 +96,7 @@ public class UserLogicService extends AbstractFacade<User> {
        us.setLastname(obj.getLastname());
        us.setEmail(obj.getEmail());
        us.setPassword(obj.getPassword());
+       us.setRole(obj.getRole());
        
         return us;
     }
@@ -108,9 +109,8 @@ public class UserLogicService extends AbstractFacade<User> {
         w.setId("" + obj.getId());
         w.setName(obj.getName());
         w.setLastname(obj.getLastname());
-        w.setEmail(obj.getEmail());
-        w.setPassword(obj.getPassword());
-        
+        w.setEmail(obj.getEmail()); 
+        w.setRole(obj.getRole());
         //TODO COMPLETE
         return w;
     }
@@ -129,5 +129,18 @@ public class UserLogicService extends AbstractFacade<User> {
         return result;
     }
     
+    
+    public UserWeb validateLogin(String user, String password) {
+        User us = getUserByEmail(user);
+        
+        if (us != null) {
+            if (us.getPassword().equals(password)) {
+                return toWeb(us);
+            }
+            return null;
+            
+        }
+        return null;
+    }
     
 }

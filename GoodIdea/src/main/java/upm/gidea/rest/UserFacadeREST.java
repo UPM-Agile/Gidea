@@ -9,6 +9,7 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -27,11 +28,11 @@ import upm.gidea.web.UserWeb;
  */
 @Stateless
 @Path("user")
-public class UserFacadeREST
-{ 
+public class UserFacadeREST {
+
     @EJB
     UserLogicService logic;
-    
+
     /**
      *
      * @param entity
@@ -53,7 +54,7 @@ public class UserFacadeREST
     @PUT
     @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit( UserWeb entity) {
+    public void edit(UserWeb entity) {
         try {
             logic.editToWeb(entity);
         } catch (Exception ex) {
@@ -105,7 +106,7 @@ public class UserFacadeREST
         }
     }
 
-     /**
+    /**
      *
      * @return
      */
@@ -137,5 +138,11 @@ public class UserFacadeREST
             return ""; //TODO
         }
     }
-    
+
+    @GET
+    @Path("check/u={email}/p={password}")
+    @Produces({"application/xml", "application/json"})
+    public UserWeb validateLogin(@PathParam("email") String user, @PathParam("password") String password) {
+        return logic.validateLogin(user, password);
+    }
 }

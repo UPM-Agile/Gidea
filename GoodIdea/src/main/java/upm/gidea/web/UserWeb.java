@@ -22,6 +22,7 @@ public class UserWeb {
     private String email;
     private String password;
 
+    private String role;
     public UserWeb() {
     }
 
@@ -63,6 +64,14 @@ public class UserWeb {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
     }
 
 }

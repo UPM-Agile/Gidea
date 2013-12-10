@@ -12,21 +12,17 @@ and open the template in the editor.
         <script src='../js/libs/underscore.js/underscore-min.js'></script>
         <script src='../js/libs/jquery/jquery.min.js'></script>
         <script src='../js/libs/backbone.js/backbone-min.js'></script>
-        <script src='UserClient.js'></script>
+        <script src='CreateUser.js'></script>
     </head>
     <body>
-        <div id='header'></div>
-
-
-        <div id='content'></div>
         <div id='create'></div>
 
         <table id='datatable' class='tablesorter-blue'>
         </table>
-        <div class='pager' id='pager'>
+<!--        <div class='pager' id='pager'>
             <img src='img/tablesorter/first.png' class='first' alt='First'/>
             <img src='img/tablesorter/prev.png' class='prev' alt='Prev'/>
-            <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
+            <span class='pagedisplay'></span>  this can be any element, including an input 
             <img src='img/tablesorter/next.png' class='next' alt='Next'/>
             <img src='img/tablesorter/last.png' class='last' alt='Last'/>
             <select class='pagesize'>
@@ -35,9 +31,8 @@ and open the template in the editor.
                 <option value='30'>30</option>
                 <option value='40'>40</option>
             </select>
-        </div>
+        </div>-->
         <br>
-
         <div id='details'></div>
 
         <!-- Templates -->
@@ -51,24 +46,24 @@ and open the template in the editor.
         </script>
 
         <script type='text/template' id='thead'>
-          <thead>
-          <tr>
-          <th>name</th>
-          <th>lastname</th>
-          <th>email</th>
-          <th>password</th>
-          <th>role </th>
-          </tr>
-          </thead>
+            <thead>
+            <tr>
+            <th>name</th>
+            <th>lastname</th>
+            <th>email</th>
+            <th>password</th>
+            <th>role </th>
+            </tr>
+            </thead>
         </script>
 
-        <script type='text/template' id='tpl-user-list-item'>
-           <td><a href='#<%= id %>'><%= name %></a></td>
-           <td><%= lastname %></td>
-           <td><%= email %></td>
-           <td><%= password%></td>
-           <td><%=role%></td>
-        </script>
+      <!--  <script type='text/template' id='tpl-user-list-item'>
+            <td><a href='#<%= id %>'><%= name %></a></td>
+            <td><%= lastname %></td>
+            <td><%= email %></td>
+            <td><%= password%></td>
+            <td><%=role%></td>
+        </script>-->
         <script type='text/template' id='tpl-user-details'>
             <div>
             <label>Id:</label>
@@ -92,10 +87,11 @@ and open the template in the editor.
             Classes 'save' and 'delete' are used to listen on events in JS code.
             -->
             <button  class='save'>Save</button>
-            <button  class='delete'>Delete</button>
+<!--            <button  class='delete'>Delete</button>-->
             </div>
         </script>
 
 
     </body>
 </html>
+
