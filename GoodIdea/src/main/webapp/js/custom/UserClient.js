@@ -280,7 +280,7 @@ $(function() {
                         // tpl-user-list-itemis template identifier for item
                         templateName: '#tpl-user-list-item'
                     });
-                    $('#datatable').html(self.listView.render().el).append(_.template($('#thead').html())());
+                    $('#datatable').html(self.listView.render().el);
                     if (self.requestedId) {
                         self.details(self.requestedId);
                     }
