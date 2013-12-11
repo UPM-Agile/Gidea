@@ -96,8 +96,9 @@ public class UserLogicService extends AbstractFacade<User> {
        us.setLastname(obj.getLastname());
        us.setEmail(obj.getEmail());
        us.setPassword(obj.getPassword());
-       us.setRole(obj.getRole());
-       
+       if (obj.getRole()!= null || !"".equals(obj.getRole().trim())) {
+       us.setRole("user");
+        }
         return us;
     }
 
