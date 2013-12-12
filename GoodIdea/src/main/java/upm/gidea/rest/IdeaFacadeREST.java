@@ -85,11 +85,13 @@ public class IdeaFacadeREST {
 
     /**
      *
+     * @param ideaId
      * @param entity
      */
     @PUT
+    @Path("{id}")
     @Consumes({"application/xml", "application/json"})
-    public void edit(IdeaWeb entity) {
+    public void edit(@PathParam("id") Integer ideaId, IdeaWeb entity) {
         try {
             logic.editWeb(entity);
         } catch (Exception ex) {

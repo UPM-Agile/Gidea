@@ -8,7 +8,7 @@ var app = {
     module: function() {
         // Internal module cache.
         var modules = {};
-        
+
         // Create a new module reference scaffold or load an
         // existing module.
         return function(name) {
@@ -16,7 +16,7 @@ var app = {
             if (modules[name]) {
                 return modules[name];
             }
-            
+
             // Create a module and save it under this name
             return modules[name] = {Views: {}};
         };
@@ -24,7 +24,7 @@ var app = {
 };
 
 (function(models) {
-    
+
 // Model for Idea entity
     models.Idea = Backbone.Model.extend({
         urlRoot: "http://localhost:8080/GoodIdea/rest/idea/",
@@ -33,8 +33,13 @@ var app = {
             id: "",
             title: "",
             description: "",
-            category:"",
-            owner: ""
+            rejectionDate: "",
+            owner: "",
+            category: "",
+            status: "",
+            creationDate: "",
+            publishingDate: "",
+            editionDate: ""
         },
         toViewJson: function() {
             var result = this.toJSON(); // displayName property is used to render item in the list
@@ -60,15 +65,15 @@ var app = {
                     // some (f.e. the same) Web project on the same domain
                     alert('Unable to fulfil the request');
                 }};
-            
+
             var result = Backbone.sync(method, model, _.extend(options, errorHandler));
             return result;
         }
-        
-        
+
+
     });
-    
-    
+
+
     // Collection class for Idea entities
     models.IdeaCollection = Backbone.Collection.extend({
         model: models.Idea,
@@ -85,21 +90,21 @@ var app = {
                     // some (f.e. the same) Web project on the same domain
                     alert('Unable to fulfil the request');
                 }};
-            
+
             var result = Backbone.sync(method, model, _.extend(options, errorHandler));
             return result;
         }
     });
-    
-    
+
+
 })(app.module("models"));
 
 (function(views) {
-    
+
     views.ListView = Backbone.View.extend({
         tagName: 'tbody',
         initialize: function() {
-            
+
             this.model.bind("reset", this.render, this);
             var self = this;
             this.model.bind("add", function(modelName) {
@@ -122,7 +127,7 @@ var app = {
             return this;
         }
     });
-    
+
     views.ListItemView = Backbone.View.extend({
         tagName: 'tr',
         initialize: function() {
@@ -134,7 +139,7 @@ var app = {
              *  templateName is element identifier in HTML
              *  $(this.options.templateName) is element access to the element
              *  using jQuery 
-             */ 
+             */
             return _.template($(this.options.templateName).html())(json);
         },
         render: function(eventName) {
@@ -148,9 +153,9 @@ var app = {
             $(this.el).remove();
             table.trigger('enable.pager');
         }
-        
+
     });
-    
+
     views.ModelView = Backbone.View.extend({
         initialize: function() {
             this.model.bind("change", this.render, this);
@@ -195,9 +200,9 @@ var app = {
                 });
             } else {
                 this.model.save();
-                this.model.el.parent().parent().trigger("update");
-                        
-                        
+//                this.model.el.parent().parent().trigger("update");
+                $(this.model.el).trigger("update");
+
             }
             return false;
         },
@@ -215,11 +220,11 @@ var app = {
             $(this.el).empty();
         }
     });
-    
+
     // This view is used to create new model element
     views.CreateView = Backbone.View.extend({
         initialize: function() {
-            this.render();  
+            this.render();
         },
         render: function(eventName) {
             $(this.el).html(this.template());
@@ -245,14 +250,14 @@ var app = {
             return false;
         }
     });
-    
+
 })(app.module("views"));
 
 
 $(function() {
     var models = app.module("models");
     var views = app.module("views");
-    
+
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'list',
@@ -352,12 +357,18 @@ $(function() {
                 title: $('#title').val(),
                 description: $('#description').val(),
                 category: $('#category').val(),
-                owner: $('#owner').val()  // get from session
+                owner: $('#owner').val(), // get from session
+                rejectionDate: $('#rejectionDate').val(),
+                status: $('#status').val(),
+                creationDate: $('#creationDate').val(),
+                publishingDate: $('#publishingDate').val(),
+                editionDate: $('#editionDate').val()
+
             };
         }
     });
     new AppRouter();
-    
-    
+
+
     Backbone.history.start();
 });

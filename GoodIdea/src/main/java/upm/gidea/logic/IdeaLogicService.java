@@ -56,7 +56,7 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
      * @param username
      * @return
      */
-    public List<IdeaWeb> viewOwnIdeas(String username) {
+    public List<IdeaWeb> viewOwnIdeas(String username) throws Exception {
         List<Idea> listIdea = userLogicService.getUserByEmail(username).getIdeas();
         List<IdeaWeb> listIdeaWeb = new ArrayList<>();
         for (Idea idea : listIdea) {
@@ -142,10 +142,6 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
             Category cat = categoryLogicService.findByName(category);
             i.setCategory(cat);
         }
-//        }else{
-//            Category cat = new Category();
-//            cat.setName;
-//        }
         User u = userLogicService.getUserByEmail(obj.getOwner());
 
         i.setOwner(u);
@@ -155,17 +151,26 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
         if (status != null) {
             i.setStatus(IdeaStatus.valueOf(status));
         }
-        String date = obj.getPublishingDate();
+        Long date = Long.getLong(obj.getPublishingDate());
         if (date != null) {
-            i.setPublishingDate(SimpleDateFormat.getInstance().parse(date));
+//            i.setPublishingDate(SimpleDateFormat.getInstance().parse(date));
+           i.setPublishingDate(new Date(date));
         }
-        date = obj.getEditionDate();
+        date = Long.getLong(obj.getEditionDate());
         if (date != null) {
-            i.setEditionDate(SimpleDateFormat.getInstance().parse(date));
+//            i.setEditionDate(SimpleDateFormat.getInstance().parse(date));
+            i.setEditionDate(new Date(date));
         }
-        date = obj.getRejectionDate();
+        date = Long.getLong(obj.getRejectionDate());
         if (date != null) {
-            i.setRejectionDate(SimpleDateFormat.getInstance().parse(date));
+//            i.setRejectionDate(SimpleDateFormat.getInstance().parse(date));
+            i.setRejectionDate(new Date(date));
+        }
+        
+        date = Long.getLong(obj.getCreationDate());
+        if (date != null) {
+//            i.setCreationDate(SimpleDateFormat.getInstance().parse(date));
+             i.setCreationDate(new Date(date));
         }
         return i;
     }
@@ -180,7 +185,25 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
         w.setOwner(obj.getOwner().getEmail());
         w.setTitle(obj.getTitle());
         w.setDescription(obj.getDescription());
-        //TODO COMPLETE
+        
+         String status = obj.getStatus().toString();
+        if (status != null) {
+            w.setStatus(obj.getStatus().toString());
+        }
+        if (obj.getPublishingDate() != null) {
+            w.setPublishingDate("" + obj.getPublishingDate().getTime());
+        }
+        if (obj.getEditionDate() != null) {
+            w.setEditionDate(""+ obj.getEditionDate().getTime());
+        }
+        if (obj.getRejectionDate()!= null) {
+            w.setRejectionDate("" + obj.getRejectionDate().getTime());
+        }
+
+        if (obj.getCreationDate()!= null) {
+            w.setCreationDate(""+obj.getCreationDate().getTime());
+        }
+         
         return w;
     }
 

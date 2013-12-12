@@ -52,7 +52,6 @@ public class UserFacadeREST {
      * @param entity
      */
     @PUT
-    @Path("{id}")
     @Consumes({"application/xml", "application/json"})
     public void edit(UserWeb entity) {
         try {
@@ -139,10 +138,17 @@ public class UserFacadeREST {
         }
     }
 
+    /**
+     *
+     * @param user
+     * @param password
+     * @return
+     * @throws Exception
+     */
     @GET
     @Path("check/u={email}/p={password}")
     @Produces({"application/xml", "application/json"})
-    public UserWeb validateLogin(@PathParam("email") String user, @PathParam("password") String password) {
+    public UserWeb validateLogin(@PathParam("email") String user, @PathParam("password") String password) throws Exception {
         return logic.validateLogin(user, password);
     }
 }
