@@ -13,6 +13,8 @@
         <link rel='stylesheet' href='css/tablesorter/bootstrap.css'>
         <link rel='stylesheet' href='css/tablesorter/bootstrap.min.css'>
         <link rel='stylesheet' href='css/custab.css'>
+        <link rel="stylesheet" href="css/tablesorter/theme.default.css" type="text/css"/>
+
         <style>
             body {
                 padding-top: 50px;
@@ -22,10 +24,12 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.js"><\/script>')</script>
         <script>
-            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src='//www.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
+            var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+            (function(d, t) {
+                var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                g.src = '//www.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g, s)
+            }(document, 'script'));
         </script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src='js/libs/underscore.js/underscore-min.js'></script>
@@ -45,40 +49,39 @@
     </head>
     <body >    
         <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Great Business Ideas!</a>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Great Business Ideas!</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li ><a href="UserHomePage.html">Home</a></li>
+                        <li class="active"><a href="MyIdeasList.html">MyIdeasList</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="UserHomePage.html">Log out</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li ><a href="UserHomePage.html">Home</a></li>
-            <li class="active"><a href="MyIdeasList.html">MyIdeasList</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username<b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="UserHomePage.html">Log out</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
-    
-        
+
+        <div id = "create"></div>
         <div class="container">
-    <div class="row col-md-6 col-md-offset-2 custyle">
-    <table id='datatable' class="table table-striped custab">
-    <thead>
-    <div id = "create"></div>
-    </table>
-    </div>
-</div>
-                <div class='pager' id='pager'>
+            <div class="row col-md-6 col-md-offset-2 custyle">
+                <table id='datatable' class="table table-striped custab">
+
+                </table>
+            </div>
+        </div>
+        <div class='pager' id='pager'>
             <img src='img/tablesorter/first.png' class='first' alt='First'/>
             <img src='img/tablesorter/prev.png' class='prev' alt='Prev'/>
             <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
@@ -160,29 +163,24 @@
         </script>
         <script>
             function show()
-{
-    document.getElementById("details").style.display="block";
-}
-            function closediv(){
-    document.getElementById('details').style.display='none';
+            {
+                document.getElementById("details").style.display = "block";
             }
-            </script>
-            <script language="Javascript">
-                function cfm() {
-                 if(confirm('Are you sure to delete it？')) {
-                  alert('Idea deleted');
-                 }
-                 else {alert ("Canceled");}
+            function closediv() {
+                document.getElementById('details').style.display = 'none';
+            }
+        </script>
+        <script language="Javascript">
+            function cfm() {
+                if (confirm('Are you sure to delete it？')) {
+                    alert('Idea deleted');
                 }
-             </script>
+                else {
+                    alert("Canceled");
+                }
+            }
+        </script>
 
-        <!-- CATEGORY COMBO BOX -->
-        <script type='text/template' id='tpl-category-list-item'>
-            <option id='#<%= id %>'><%= name %></option>
-        </script>
-        <script type='text/template' id='category_tpl-create'>
-        </script>
-        <script type='text/template' id='category_tpl-details'>
-        </script>
+
     </body>
 </html>

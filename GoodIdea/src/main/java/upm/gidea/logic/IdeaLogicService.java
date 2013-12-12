@@ -148,13 +148,15 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
         i.setDescription(obj.getDescription());
         i.setTitle(obj.getTitle());
         String status = obj.getStatus();
-        if (status != null) {
+        if (status != null && !"".equals(obj.getStatus().trim())) {
             i.setStatus(IdeaStatus.valueOf(status));
         }
         Long date = Long.getLong(obj.getPublishingDate());
         if (date != null) {
-//            i.setPublishingDate(SimpleDateFormat.getInstance().parse(date));
+
            i.setPublishingDate(new Date(date));
+        }else{
+//            i.setPublishingDate(SimpleDateFormat.getInstance().parse(date));
         }
         date = Long.getLong(obj.getEditionDate());
         if (date != null) {
