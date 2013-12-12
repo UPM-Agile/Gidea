@@ -80,13 +80,7 @@
             <td><input type='text' id='description' name='description' value='<%= description %>'/></td></tr>
             <tr>
             <td>Category</td>
-            <td>              
-                <div class="form-group" id="category_datatable">
-                     <select class="form-control" id="category" value='<%= category %>'>
-                     </select>
-                 </div>
-            
-            </td></tr>
+          <td><input type='text' id='category' name='category' value='<%= category %>'/></td></tr>
             <tr>
             <td>owner</td>
             <td><input type='text' id='owner' name='owner' value='<%= owner %>'/></td></tr>
@@ -105,11 +99,11 @@
         <script type='text/template' id='tpl-category-list-item'>
             <option id='#<%= id %>'><%= name %></option>
         </script>
-        
+
         <script type='text/template' id='category_tpl-create'>
         </script>
         <script type='text/template' id='category_tpl-details'>
         </script>                
-        
+
     </body>
 </html>

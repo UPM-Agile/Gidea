@@ -29,7 +29,8 @@ public class UserLogicService extends AbstractFacade<User> {
         return em;
     }
 
-    public User getUserByEmail(String username) {
+    public User getUserByEmail(String username)throws Exception {
+        
         return em.createNamedQuery("User.findByEmail",User.class).setParameter("email", username).getSingleResult();
     }
     
@@ -131,7 +132,7 @@ public class UserLogicService extends AbstractFacade<User> {
     }
     
     
-    public UserWeb validateLogin(String user, String password) {
+    public UserWeb validateLogin(String user, String password) throws Exception {
         User us = getUserByEmail(user);
         
         if (us != null) {

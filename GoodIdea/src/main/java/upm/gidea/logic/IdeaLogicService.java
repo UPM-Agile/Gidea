@@ -142,6 +142,10 @@ public class IdeaLogicService extends AbstractFacade<Idea> {
             Category cat = categoryLogicService.findByName(category);
             i.setCategory(cat);
         }
+//        }else{
+//            Category cat = new Category();
+//            cat.setName;
+//        }
         User u = userLogicService.getUserByEmail(obj.getOwner());
 
         i.setOwner(u);

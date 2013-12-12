@@ -45,7 +45,15 @@ public class CategoryLogicService extends AbstractFacade<Category> {
     }
 
     public Category findByName(String name) throws Exception {
-        return em.createNamedQuery("Category.findByName", Category.class).setParameter("name", name).getSingleResult();
+        try {
+            return em.createNamedQuery("Category.findByName", Category.class).setParameter("name", name).getSingleResult();
+        } catch (Exception e) {
+            Category cat = new Category();
+            cat.setName(name);
+            super.create(cat);
+            return  cat;
+        }
+        
 
     }
     
