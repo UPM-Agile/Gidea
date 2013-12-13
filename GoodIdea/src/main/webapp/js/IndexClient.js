@@ -207,6 +207,10 @@ var app = {
             return false;
         },
         drop: function() {
+            if(!confirm("Are you sure to delete it？"))
+            {
+                return;
+            }
             this.model.destroy({
                 success: function() {
                     alert("Model is successfully deleted");

@@ -66,6 +66,7 @@ function logout()
     {
         alert("You have logged out succesfully.");
         console.log("Cookie deleted");
+        $("#logout").hide();
     } else
     {
         console.log("Cookie not deleted");

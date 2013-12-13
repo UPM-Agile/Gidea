@@ -12,6 +12,7 @@
         <link rel='stylesheet' href='css/tablesorter/bootstrap-theme.min.css'>
         <link rel='stylesheet' href='css/tablesorter/bootstrap.css'>
         <link rel='stylesheet' href='css/tablesorter/bootstrap.min.css'>
+        <link rel="stylesheet" href="css/tablesorter/main.css">
         <link rel='stylesheet' href='css/custab.css'>
         <link rel="stylesheet" href="css/tablesorter/theme.default.css" type="text/css"/>
 
@@ -41,7 +42,6 @@
         <script src='js/bootstrap.js'></script>
         <script src='js/bootstrap.min.js'></script>
         <script src='js/MyIdeasList.js'></script>
-        <script src='js/custom/ValidateIdea.js'></script>
         <!-- 
         
         <script src='Idea/CategoryClient.js'></script>
@@ -63,22 +63,16 @@
                     <ul class="nav navbar-nav">
                         <li ><a href="UserHomePage.html">Home</a></li>
                         <li class="active"><a href="MyIdeasList.html">MyIdeasList</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Username<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="UserHomePage.html">Log out</a></li>
-                            </ul>
-                        </li>
                     </ul>
                 </div><!--/.navbar-collapse -->
             </div>
         </div>
 
-        <div id = "create"></div>
+        
         <div class="container">
             <div class="row col-md-6 col-md-offset-2 custyle">
+                <div id = "create"></div>
                 <table id='datatable' class="table table-striped custab">
-
                 </table>
             </div>
         </div>
@@ -104,8 +98,8 @@
 
             Class 'new' is used to listen on events in JS code.
             -->
-            <div class="btn-group pull-right">
-            <button type = "button" class="new btn btn-primary btn-xs" onclick = "show()"><b>+</b> Create new idea</button>
+            <div class="btn-group">
+            <button type = "button" class="new btn btn-primary btn-xs pull-right" onclick = "show()"><b>+</b> Create new idea</button>
             </div>
         </script>
 
@@ -135,16 +129,16 @@
             <tr><td></td>
             <input type='hidden' id='id' name='id' value='<%= id%>'/></td></tr>
             <tr><td>Title</td>
-            <td><input class="form-control" type='text' id='title' name='title' value='<%= title %>' required/></td></tr>
+            <td><input class="form-control" type='text' id='title' name='title' value='<%= title %>' /></td></tr>
             <tr>
             <td>Description</td>
-            <td><input class="form-control" type='text' id='description' name='description' value='<%= description %>' required/></td></tr>
+            <td><input class="form-control" type='text' id='description' name='description' value='<%= description %>'/></td></tr>
              <tr>
             <td>Category</td>
-          <td><input class="form-control" type='text' id='category' name='category' value='<%= category %>' required/></td></tr>
+          <td><input class="form-control" type='text' id='category' name='category' value='<%= category %>'/></td></tr>
             <tr>
             <td>owner</td>
-            <td><input class="form-control" type='text' id='owner' name='owner' value='<%= owner %>' required/></td></tr>
+            <td><input class="form-control" type='text' id='owner' name='owner' value='<%= owner %>'/></td></tr>
             <tr><td><input type='hidden' id='rejectionDate' name='rejectionDate' value='<%= rejectionDate%>'/></td></tr>
             <tr><td><input type='hidden' id='status' name='status' value='<%= status%>'/></td></tr>
             <tr><td><input type='hidden' id='creationDate' name='creationDate' value='<%= creationDate%>'/></td></tr>
@@ -156,8 +150,8 @@
             Put your controls to create new entity here.
             Classes 'save' and 'delete' are used to listen on events in JS code.
             -->
-            <button  type="button" class="save btn btn-primary" >Save</button>
-            <button  type="button" class="delete btn btn-danger"  onclick = "cfm()">Delete</button>
+            <button  type="button" class="save btn btn-primary" onclick="closediv();">Save</button>
+            <button  type="button" class="delete btn btn-danger" onclick="closediv();" >Delete</button>
             <button  type="button" class="btn btn-warning" onclick="closediv();">Close</button>
             </div>
             </div>
@@ -170,16 +164,7 @@
             function closediv() {
                 document.getElementById('details').style.display = 'none';
             }
-        </script>
-        <script language="Javascript">
-            function cfm() {
-                if (confirm('Are you sure to delete it？')) {
-                    alert('Idea deleted');
-                }
-                else {
-                    alert("Canceled");
-                }
-            }
+
         </script>
 
 
