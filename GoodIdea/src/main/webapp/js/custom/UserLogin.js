@@ -9,7 +9,7 @@ function check()
 {
     var u = document.getElementById("email").value;
     if (checkspace(u)) {
-        document.LoginForm.username.focus();
+        document.LoginForm.email.focus();
         alert("Please enter a username！");
         return false;
     }
@@ -24,23 +24,73 @@ function check()
 
 //authenticate function to make ajax call
 function authenticate(u, p) {
-    $.get("http://localhost:8080/GoodIdea/rest/user/check/u=" + u +"/p="+ p, function(result) {
-        alert(result);
+    console.log("Logging in.");
+    $.ajax({
+        type: "GET",
+        //the url where you want to sent the userName and password to
+        url: "http://localhost:8080/GoodIdea/rest/user/check/u=" + u + "/p=" + p,
+        async: false,
+        //json object to sent to the authentication url
+        //data: p,
+        headers: {'Content-type': 'application/json'},
+        //complete: ,
+        success: function(result) {
+            if (result) {
+                console.log("Creating cookie:");
+                $.cookie.raw = true;
+                $.cookie("username", u);
+            }
+            console.log("Invalid user or password");
+            console.log(u);
+            console.log(result);
+        }
     });
-//        $.ajax
-//        ({
-//            type: "POST",
-//            //the url where you want to sent the userName and password to
-//            url: "http://localhost:8080/GoodIdea/rest/user/" + u,
-//            async: false,
-//            //json object to sent to the authentication url
-//            data: p,
-//            success: function(result) {
-//                alert(result);
-//            }
-//        });
 }
 
+function getLoggedUser() {
+    $.cookie.raw = true;
+    var user = $.cookie("username");
+    if (user)
+    {
+        console.log("Reading cookie:");
+        return user;
+    }
+    console.log("Cookie not found");
+    return false;
+}
+;
+function logout()
+{
+    console.log("Removing cookie:");
+    if ($.removeCookie("username"))
+    {
+        alert("You have logged out succesfully.");
+        console.log("Cookie deleted");
+    } else
+    {
+        console.log("Cookie not deleted");
+    }
+
+}
+;
+function fillLoginData() {
+    console.log("starting logging");
+    $("#login_user").hide();
+    $("#logout").hide();
+    var user = getLoggedUser();
+    if (user)
+    {
+        $("#login_user").append(user);
+        $("#logout").bind("click", function() {
+            console.log("logout");
+            logout();
+        });
+        $("#login_user").show();
+        $("#logout").show();
+    }
+}
+;
 window.onload = function() {
     document.getElementById("signin_submit").onclick = check;
+    fillLoginData();
 };

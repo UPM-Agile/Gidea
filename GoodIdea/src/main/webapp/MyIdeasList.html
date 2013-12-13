@@ -41,6 +41,7 @@
         <script src='js/bootstrap.js'></script>
         <script src='js/bootstrap.min.js'></script>
         <script src='js/MyIdeasList.js'></script>
+        <script src='js/custom/ValidateIdea.js'></script>
         <!-- 
         
         <script src='Idea/CategoryClient.js'></script>
@@ -134,16 +135,16 @@
             <tr><td></td>
             <input type='hidden' id='id' name='id' value='<%= id%>'/></td></tr>
             <tr><td>Title</td>
-            <td><input class="form-control" type='text' id='title' name='title' value='<%= title %>'/></td></tr>
+            <td><input class="form-control" type='text' id='title' name='title' value='<%= title %>' required/></td></tr>
             <tr>
             <td>Description</td>
-            <td><input class="form-control" type='text' id='description' name='description' value='<%= description %>'/></td></tr>
+            <td><input class="form-control" type='text' id='description' name='description' value='<%= description %>' required/></td></tr>
              <tr>
             <td>Category</td>
-          <td><input class="form-control" type='text' id='category' name='category' value='<%= category %>'/></td></tr>
+          <td><input class="form-control" type='text' id='category' name='category' value='<%= category %>' required/></td></tr>
             <tr>
             <td>owner</td>
-            <td><input class="form-control" type='text' id='owner' name='owner' value='<%= owner %>'/></td></tr>
+            <td><input class="form-control" type='text' id='owner' name='owner' value='<%= owner %>' required/></td></tr>
             <tr><td><input type='hidden' id='rejectionDate' name='rejectionDate' value='<%= rejectionDate%>'/></td></tr>
             <tr><td><input type='hidden' id='status' name='status' value='<%= status%>'/></td></tr>
             <tr><td><input type='hidden' id='creationDate' name='creationDate' value='<%= creationDate%>'/></td></tr>
