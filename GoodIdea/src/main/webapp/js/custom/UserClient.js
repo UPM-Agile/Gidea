@@ -191,11 +191,13 @@ var app = {
                         // see isNew() method implementation in the model
                         self.model.notSynced = false;
                         self.options.navigate(self.model.id);
+                        window.location.href = "/GoodIdea/MyIdeasList.html"
                     }
                 });
             } else {
                 this.model.save();
-                this.model.el.parent().parent().trigger("update");
+                //this.model.el.parent().parent().trigger("update");
+                $(this.model.el).trigger("update"); 
                         
                         
             }

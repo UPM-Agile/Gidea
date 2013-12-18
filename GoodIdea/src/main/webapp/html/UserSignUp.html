@@ -10,32 +10,33 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/tablesorter/bootstrap.min.css">
+        <link rel="stylesheet" href="../js/libs/bootstrap/css/bootstrap.min.css">
         <style>
             body {
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
         </style>
-        <link rel="stylesheet" href="css/tablesorter/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="../js/libs/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../css/main.css">
+
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="../js/vendor/jquery-1.10.1.js"><\/script>');</script>
 
-        <script src="js/libs/bootstrap/js/bootstrap.min.js"></script>
-
-        <script src="js/custom/main.js"></script>
+        <script src="../js/libs/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="../js/main.js"></script>
 
         <script>
             var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
             (function(d, t) {
                 var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
                 g.src = '//www.google-analytics.com/ga.js';
-                s.parentNode.insertBefore(g, s)
+                s.parentNode.insertBefore(g, s);
             }(document, 'script'));
         </script>
 
-        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -83,36 +84,33 @@ to improve your experience.</p>
 
         <div class="container">
 
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
-                    <h3>Sign Up Now! </h3>
-                    <form name = "SignUpForm" method="post" class="navbar-form"  role="form">
-                        <div class="row">
-                            <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="firstname" placeholder="First Name" 
-                                       type="text" />
-                            </div>
-                            <div class="col-xs-6 col-md-6">
-                                <input class="form-control" name="lastname" placeholder="Last Name" 
-                                       type="text" />
-                            </div>
+            <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
+                <!--<legend>Sign up!</legend>-->
+                <form name = "SignUpForm" method="post" class="navbar-form">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-6">
+                            <input class="form-control" name="firstname" placeholder="First Name" 
+                                   type="text" />
                         </div>
-                        <input class="form-control" name="youremail" placeholder="Your Email" 
-                               type="email" />
-                        <input class="form-control" name="reenteremail" placeholder="Re-enter Email" 
-                               type="email" />
-                        <input class="form-control" name="password" placeholder="Password" 
-                               type="password" />
-                        <br />
-                        <br />
-                        <script language="javascript" src="js/custom/UserSignUp.js"></script>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">
-                            Sign up</button>
-                    </form>
-                </div>
+                        <div class="col-xs-6 col-md-6">
+                            <input class="form-control" name="lastname" placeholder="Last Name" 
+                                   type="text" />
+                        </div>
+                    </div>
+                    <input class="form-control" name="youremail" placeholder="Your Email" 
+                           type="email" />
+                    <input class="form-control" name="reenteremail" placeholder="Re-enter Email" 
+                           type="email" />
+                    <input class="form-control" name="password" placeholder="Password" 
+                           type="password" />
+                    <br />
+                    <br />
+                    <script language="javascript" src="../js/custom/UserSignUp.js"></script>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">
+                        Sign up</button>
+                </form>
             </div>
         </div>
-
         <hr>
 
         <footer>

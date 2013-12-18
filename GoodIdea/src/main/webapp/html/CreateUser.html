@@ -1,16 +1,24 @@
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
-
-<html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>Create Idea</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel='stylesheet' href='../css/tablesorter/theme.blue.css'>
-        <link rel='stylesheet' href='../css/tablesorter/jquery.tablesorter.pager.css'>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="../js/libs/bootstrap/css/bootstrap.min.css">
+        <style>
+            body {
+                padding-top: 50px;
+                padding-bottom: 20px;
+            }
+        </style>
+        <link rel="stylesheet" href="../js/libs/bootstrap/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="../css/main.css">
 
         <script src='../js/libs/underscore.js/underscore-min.js'></script>
         <script src='../js/libs/jquery/jquery.min.js'></script>
@@ -19,27 +27,46 @@ and open the template in the editor.
         <script src='../js/libs/tablesorter/jquery.tablesorter.pager.js'></script>
         <script src='../js/custom/CreateUser.js'></script>
     </head>
-    <body>
-        <div id='create'></div>
 
-<!--        <table id='datatable' class='tablesorter-blue'>
-        </table>-->
-        <!--        <div class='pager' id='pager'>
-                    <img src='img/tablesorter/first.png' class='first' alt='First'/>
-                    <img src='img/tablesorter/prev.png' class='prev' alt='Prev'/>
-                    <span class='pagedisplay'></span>  this can be any element, including an input 
-                    <img src='img/tablesorter/next.png' class='next' alt='Next'/>
-                    <img src='img/tablesorter/last.png' class='last' alt='Last'/>
-                    <select class='pagesize'>
-                        <option selected='selected' value='10'>10</option>
-                        <option value='20'>20</option>
-                        <option value='30'>30</option>
-                        <option value='40'>40</option>
-                    </select>
-                </div>-->
-        <br>
+    
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Great Business Ideas!</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="../index.html">Home</a></li>
+                    </ul>
+                </div><!--/.navbar-collapse -->
+            </div>
+        </div>
+        <hr>
+        <!--[if lt IE 7]>
+         <p class="chromeframe">You are using an <strong>outdated</strong> browser. 
+Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a 
+href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> 
+to improve your experience.</p>
+     <![endif]-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-4 well well-sm">
+            <legend> Sign up!</legend>
         <div id='details'></div>
 
+        </div>
+    </div>
+</div>
         <!-- Templates -->
         <script type='text/template' id='tpl-user-create'>
             <!--
@@ -70,31 +97,29 @@ and open the template in the editor.
               <td><%=role%></td>-->
           </script>
         <script type='text/template' id='tpl-user-details'>
-            <div>
-            <tr><td></td>
+            <div lass="form-group">
+            <tr>
             <input type='hidden' id='id' name='id' value='<%= id%>'/></td></tr>
             <tr><td>
-            <label>Name:</label>
-            <input type='text' id='name' name='name' value='<%= name %>'/></td></tr>
+            <label class="col-sm-2 control-label">Name:</label>
+            <input class="form-control" placeholder="First Name"type='text' id='name' name='name' value='<%= name %>'/></td></tr>
             <tr>
-            <label>Lastname:</label>
-            <input type='text' id='lastname' name='lastname' value='<%= lastname %>'/></t>
+            <label class="col-sm-2 control-label">Lastname:</label>
+            <input class="form-control" placeholder="Lastname" type='text' id='lastname' name='lastname' value='<%= lastname %>'/></t>
             <tr>
-            <label>Email:</label>
-            <input type='text' id='email' name='email' value='<%= email %>'/></tr>
+            <label class="col-sm-2 control-label">Email:</label>
+            <input class="form-control" placeholder="Email" type='text' id='email' name='email' value='<%= email %>'/></tr>
             <tr>
-            <label>Password:</label>
-            <input type='text' id='password' name='password' value='<%= password %>'/></tr>
+            <label class="col-sm-2 control-label">Password:</label>
+            <input class="form-control" placeholder="Password" type='password' id='password' name='password' value='<%= password %>'/></tr>
             <input type='hidden' id='role' name='role' value='<%= role %>'/>
             <!--
             Put your controls to create new entity here.
             Classes 'save' and 'delete' are used to listen on events in JS code.
             -->
-            <button  class='save'>Save</button>
-<!--            <button  class='delete'>Delete</button>-->
+            <button  class='save btn btn-primary'>Register!</button>
             </div>
         </script>
-
 
     </body>
 </html>

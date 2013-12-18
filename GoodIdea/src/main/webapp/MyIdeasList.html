@@ -12,7 +12,6 @@
         <link rel='stylesheet' href='css/tablesorter/bootstrap-theme.min.css'>
         <link rel='stylesheet' href='css/tablesorter/bootstrap.css'>
         <link rel='stylesheet' href='css/tablesorter/bootstrap.min.css'>
-        <link rel="stylesheet" href="css/tablesorter/main.css">
         <link rel='stylesheet' href='css/custab.css'>
         <link rel="stylesheet" href="css/tablesorter/theme.default.css" type="text/css"/>
 
@@ -23,13 +22,14 @@
             }
         </style>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.js"><\/script>')</script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.js"><\/script>');
+        </script>
         <script>
             var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
             (function(d, t) {
                 var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
                 g.src = '//www.google-analytics.com/ga.js';
-                s.parentNode.insertBefore(g, s)
+                s.parentNode.insertBefore(g, s);
             }(document, 'script'));
         </script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -38,15 +38,12 @@
         <script src='js/libs/backbone.js/backbone-min.js'></script>
         <script src='js/libs/tablesorter/jquery.tablesorter.min.js'></script>
         <script src='js/libs/tablesorter/jquery.tablesorter.pager.js'></script>
-        <script src='js/IndexClient.js'></script>
-        <script src='js/bootstrap.js'></script>
-        <script src='js/bootstrap.min.js'></script>
-        <script src='js/MyIdeasList.js'></script>
-        <!-- 
-        
-        <script src='Idea/CategoryClient.js'></script>
-        
-        -->
+        <script src='js/custom/IndexClient.js'></script>
+        <script src='js/libs/bootstrap/js/bootstrap.js'></script>
+        <script src='js/libs/bootstrap/js/bootstrap.min.js'></script>
+        <script src='js/custom/MyIdeasList.js'></script>
+        <script src='js/custom/UserLogin.js'></script>
+       
     </head>
     <body >    
         <div class="navbar navbar-inverse navbar-fixed-top">
@@ -61,18 +58,22 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li ><a href="UserHomePage.html">Home</a></li>
-                        <li class="active"><a href="MyIdeasList.html">MyIdeasList</a></li>
+                        <li ><a href="index.html">Home</a></li>
+                        <li class="active"><a href="MyIdeasList.html">My Ideas</a></li>
+                        <li><a href="index.html" id = "logout" onclick="logout();">Log out</a></li>
                     </ul>
                 </div><!--/.navbar-collapse -->
+
+
+
             </div>
         </div>
 
-        
+        <div id = "create"></div>
         <div class="container">
             <div class="row col-md-6 col-md-offset-2 custyle">
-                <div id = "create"></div>
                 <table id='datatable' class="table table-striped custab">
+
                 </table>
             </div>
         </div>
@@ -80,8 +81,8 @@
             <img src='img/tablesorter/first.png' class='first' alt='First'/>
             <img src='img/tablesorter/prev.png' class='prev' alt='Prev'/>
             <span class='pagedisplay'></span> <!-- this can be any element, including an input -->
-            <img src='img/tablesorter/next.png' class='next' alt='Next'/>
-            <img src='img/tablesorter/last.png' class='last' alt='Last'/>
+            <img src='../img/tablesorter/next.png' class='next' alt='Next'/>
+            <img src='../img/tablesorter/last.png' class='last' alt='Last'/>
             <select class='pagesize'>
                 <option selected='selected' value='10'>10</option>
                 <option value='20'>20</option>
@@ -98,8 +99,8 @@
 
             Class 'new' is used to listen on events in JS code.
             -->
-            <div class="btn-group">
-            <button type = "button" class="new btn btn-primary btn-xs pull-right" onclick = "show()"><b>+</b> Create new idea</button>
+            <div class="btn-group pull-right">
+            <button type = "button" class="new btn btn-primary btn-xl" onclick = "show()"><b>+</b> Create new idea</button>
             </div>
         </script>
 
@@ -119,26 +120,28 @@
             <td><%= description %></td>
             <td><%= category %></td>
             <td><%= owner%></td>
-            <td class="text-center"><a class='btn btn-info btn-xs' href='#<%= id %>' onclick = "show();"><span class="glyphicon glyphicon-edit"></span> Edit</a><a class="btn btn-success btn-xs"><span class="glyphicon glyphicon-remove"></span>Publish</a></td>
+            <td class="text-center"><a class='btn btn-info btn-xs' href='#<%= id %>' onclick = 'show();'>Edit</a><a class="btn btn-success btn-xs">Publish</a></td>
         </script>
         <script type='text/template' id='tpl-idea-details'>
             <div id = "EditTable" class="col-xs-12 col-sm-12 col-md-4 well well-sm " style="Z-INDEX: 99999; BORDER-BOTTOM: #455690 1px solid; POSITION: absolute;right:0px; bottom:0px;">
+            <h3>Idea details</h3>
+
             <div class="panel panel-default">
             <table>
             <form method="post" class="navbar-form navbar-right">
             <tr><td></td>
             <input type='hidden' id='id' name='id' value='<%= id%>'/></td></tr>
             <tr><td>Title</td>
-            <td><input class="form-control" type='text' id='title' name='title' value='<%= title %>' /></td></tr>
+            <td><input class="form-control" type='text' id='title' name='title' value='<%= title %>' required/></td></tr>
             <tr>
             <td>Description</td>
-            <td><input class="form-control" type='text' id='description' name='description' value='<%= description %>'/></td></tr>
-             <tr>
+            <td><input class="form-control" type='text' id='description' name='description' value='<%= description %>' required/></td></tr>
+            <tr>
             <td>Category</td>
-          <td><input class="form-control" type='text' id='category' name='category' value='<%= category %>'/></td></tr>
+            <td><input class="form-control" type='text' id='category' name='category' value='<%= category %>' required/></td></tr>
             <tr>
             <td>owner</td>
-            <td><input class="form-control" type='text' id='owner' name='owner' value='<%= owner %>'/></td></tr>
+            <td><input class="form-control" type='text' id='owner' name='owner' value='<%= owner %>' required/></td></tr>
             <tr><td><input type='hidden' id='rejectionDate' name='rejectionDate' value='<%= rejectionDate%>'/></td></tr>
             <tr><td><input type='hidden' id='status' name='status' value='<%= status%>'/></td></tr>
             <tr><td><input type='hidden' id='creationDate' name='creationDate' value='<%= creationDate%>'/></td></tr>
@@ -150,23 +153,11 @@
             Put your controls to create new entity here.
             Classes 'save' and 'delete' are used to listen on events in JS code.
             -->
-            <button  type="button" class="save btn btn-primary" onclick="closediv();">Save</button>
-            <button  type="button" class="delete btn btn-danger" onclick="closediv();" >Delete</button>
+            <button  type="button" class="save btn btn-primary" >Save</button>
+            <button  type="button" class="delete btn btn-danger">Delete</button>
             <button  type="button" class="btn btn-warning" onclick="closediv();">Close</button>
             </div>
             </div>
         </script>
-        <script>
-            function show()
-            {
-                document.getElementById("details").style.display = "block";
-            }
-            function closediv() {
-                document.getElementById('details').style.display = 'none';
-            }
-
-        </script>
-
-
     </body>
 </html>

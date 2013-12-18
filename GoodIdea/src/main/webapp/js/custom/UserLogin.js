@@ -39,9 +39,12 @@ function authenticate(u, p) {
                 console.log("Creating cookie:");
                 $.cookie.raw = true;
                 $.cookie("username", u);
+                window.location.href = "/GoodIdea/MyIdeasList.html"
             }
-            console.log("Invalid user or password");
-            console.log(u);
+            else
+            {
+                alert("Invalid user or password");
+            }
             console.log(result);
         }
     });
@@ -64,7 +67,7 @@ function logout()
     console.log("Removing cookie:");
     if ($.removeCookie("username"))
     {
-        alert("You have logged out succesfully.");
+        //alert("You have logged out succesfully.");
         console.log("Cookie deleted");
         $("#logout").hide();
     } else

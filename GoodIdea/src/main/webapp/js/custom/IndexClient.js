@@ -196,12 +196,14 @@ var app = {
                         // see isNew() method implementation in the model
                         self.model.notSynced = false;
                         self.options.navigate(self.model.id);
+                        $('#details').hide();
                     }
                 });
             } else {
                 this.model.save();
 //                this.model.el.parent().parent().trigger("update");
                 $(this.model.el).trigger("update");
+                $('#details').hide();
 
             }
             return false;
@@ -213,8 +215,8 @@ var app = {
             }
             this.model.destroy({
                 success: function() {
-                    alert("Model is successfully deleted");
-                    //window.location="/GoodIdea/"
+                    //alert("Model is successfully deleted");
+                    $('#details').hide();
                 }
             });
             return false;
@@ -222,6 +224,7 @@ var app = {
         close: function() {
             $(this.el).unbind();
             $(this.el).empty();
+            $('#details').hide();
         }
     });
 
@@ -376,3 +379,11 @@ $(function() {
 
     Backbone.history.start();
 });
+
+            function show()
+            {
+                document.getElementById("details").style.display = "block";
+            }
+            function closediv() {
+                document.getElementById('details').style.display = 'none';
+            }
